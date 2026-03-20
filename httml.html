@@ -1,119 +1,107 @@
 <html>
 <head>
-<title>Моя страница</title>
-<style>
-.card {
-  border: 1px solid black;
-  margin: 10px;
-  padding: 5px;
-}
-.window {
-  border: 1px dashed red;
-  margin: 3px;
-  padding: 3px;
-}
-.w1 {color: blue;}
-.w2 {font-size: 20px;}
-.w3 {background: yellow;}
-.w4 {font-style: italic;}
-</style>
+  <title>Карточки внутри карточек</title>
+
+  <style>
+    .section {
+      border: 2px solid gray;
+      margin: 20px;
+      padding: 10px;
+      background: #eaeaea;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      border: 2px solid black;
+      padding: 10px;
+      width: 220px;
+      background: #f5f5f5;
+    }
+
+    .window {
+      border: 1px dashed red;
+      margin: 5px;
+      padding: 5px;
+      transition: 0.3s;
+    }
+
+    .w1 { color: blue; font-size: 18px; }
+    .w1:hover { transform: scale(1.1); }
+
+    .w2 { background: yellow; font-weight: bold; }
+    .w2:hover { background: orange; }
+
+    .w3 { font-style: italic; color: green; }
+    .w3:hover { transform: rotate(5deg); }
+
+    .w4 { background: pink; font-family: Courier; }
+    .w4:hover { opacity: 0.6; }
+  </style>
 </head>
 <body>
 
-<h1>Привет это мой сайт</h1>
+<h1>4 секции → карточки → окошки</h1>
 
-<!-- Секция 1 -->
-<div>
-  <h2>Секция 1</h2>
-  <div class="card">
-    <div class="window w1">окно 1</div>
-    <div class="window w2">окно 2</div>
-    <div class="window w3">окно 3</div>
-    <div class="window w4">окно 4</div>
-  </div>
-  <div class="card">
-    <div class="window w1">текст а</div>
-    <div class="window w2">текст б</div>
-    <div class="window w3">текст в</div>
-    <div class="window w4">текст г</div>
-  </div>
-  <div class="card">
-    <div class="window w1">111</div>
-    <div class="window w2">222</div>
-    <div class="window w3">333</div>
-    <div class="window w4">444</div>
-  </div>
-</div>
+<!-- LocalStorage -->
+<input id="text" placeholder="Напиши что-то">
+<button onclick="save()">Сохранить</button>
 
-<!-- Секция 2 -->
-<div>
-  <h2>Секция 2</h2>
-  <div class="card">
-    <div class="window w1">one</div>
-    <div class="window w2">two</div>
-    <div class="window w3">three</div>
-    <div class="window w4">four</div>
-  </div>
-  <div class="card">
-    <div class="window w1">alpha</div>
-    <div class="window w2">beta</div>
-    <div class="window w3">gamma</div>
-    <div class="window w4">delta</div>
-  </div>
-  <div class="card">
-    <div class="window w1">красный</div>
-    <div class="window w2">зелёный</div>
-    <div class="window w3">синий</div>
-    <div class="window w4">жёлтый</div>
-  </div>
-</div>
+<p>Сохранено:</p>
+<div id="out"></div>
 
-<!-- Секция 3 -->
-<div>
-  <h2>Секция 3</h2>
-  <div class="card">
-    <div class="window w1">☀️</div>
-    <div class="window w2">🌙</div>
-    <div class="window w3">⭐</div>
-    <div class="window w4">⚡</div>
-  </div>
-  <div class="card">
-    <div class="window w1">music</div>
-    <div class="window w2">dance</div>
-    <div class="window w3">art</div>
-    <div class="window w4">drama</div>
-  </div>
-  <div class="card">
-    <div class="window w1">spring</div>
-    <div class="window w2">summer</div>
-    <div class="window w3">autumn</div>
-    <div class="window w4">winter</div>
-  </div>
-</div>
+<hr>
 
-<!-- Секция 4 -->
-<div>
-  <h2>Секция 4</h2>
-  <div class="card">
-    <div class="window w1">html</div>
-    <div class="window w2">css</div>
-    <div class="window w3">js</div>
-    <div class="window w4">react</div>
-  </div>
-  <div class="card">
-    <div class="window w1">dog</div>
-    <div class="window w2">cat</div>
-    <div class="window w3">bird</div>
-    <div class="window w4">fish</div>
-  </div>
-  <div class="card">
-    <div class="window w1">🍎</div>
-    <div class="window w2">🍌</div>
-    <div class="window w3">🍇</div>
-    <div class="window w4">🍉</div>
-  </div>
-</div>
+<!-- 4 секции -->
+<div class="section"><h2>Секция 1</h2></div>
+<div class="section"><h2>Секция 2</h2></div>
+<div class="section"><h2>Секция 3</h2></div>
+<div class="section"><h2>Секция 4</h2></div>
+
+<script>
+/* ---------------- LOCAL STORAGE ---------------- */
+function save() {
+  let value = document.getElementById("text").value;
+  localStorage.setItem("myValue", value);
+  show();
+}
+
+function show() {
+  document.getElementById("out").innerText = localStorage.getItem("myValue");
+}
+
+show();
+
+/* ---------------- ПЕРЕМЕШАТЬ СЕКЦИИ ---------------- */
+let sections = document.querySelectorAll(".section");
+let arr = Array.from(sections).sort(() => Math.random() - 0.5);
+arr.forEach(sec => document.body.appendChild(sec));
+
+/* ---------------- УДАЛИТЬ ВСЕ КАРТОЧКИ И ДОБАВИТЬ 8 НОВЫХ ---------------- */
+document.querySelectorAll(".section").forEach(section => {
+
+  // Удаляем старые карточки (если были)
+  let oldCards = section.querySelectorAll(".card");
+  oldCards.forEach(c => c.remove());
+
+  // Добавляем 8 новых карточек
+  for (let i = 1; i <= 8; i++) {
+    let card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="window w1">Окно 1</div>
+      <div class="window w2">Окно 2</div>
+      <div class="window w3">Окно 3</div>
+      <div class="window w4">Окно 4</div>
+    `;
+
+    section.appendChild(card);
+  }
+});
+</script>
 
 </body>
 </html>
-
