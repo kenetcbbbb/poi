@@ -82,7 +82,7 @@ arr.forEach(sec => document.body.appendChild(sec));
 /* ---------------- УДАЛИТЬ ВСЕ КАРТОЧКИ И ДОБАВИТЬ 8 НОВЫХ ---------------- */
 document.querySelectorAll(".section").forEach(section => {
 
-  // Удаляем старые карточки (если были)
+  // Удаляем старые карточки
   let oldCards = section.querySelectorAll(".card");
   oldCards.forEach(c => c.remove());
 
