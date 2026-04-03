@@ -1,19 +1,26 @@
 <html>
 <head>
-  <title>Карточки внутри карточек</title>
+  <title>Карточки внутри карточек - БЭМ версия</title>
 
   <style>
+    /* Блок section */
     .section {
       border: 2px solid gray;
       margin: 20px;
       padding: 10px;
       background: #eaeaea;
-
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
     }
 
+    /* Элемент заголовка секции */
+    .section__title {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
+
+    /* Блок card */
     .card {
       border: 2px solid black;
       padding: 10px;
@@ -21,6 +28,7 @@
       background: #f5f5f5;
     }
 
+    /* Блок window */
     .window {
       border: 1px dashed red;
       margin: 5px;
@@ -28,37 +36,96 @@
       transition: 0.3s;
     }
 
-    .w1 { color: blue; font-size: 18px; }
-    .w1:hover { transform: scale(1.1); }
+    /* Модификаторы блока window */
+    .window--style1 {
+      color: blue;
+      font-size: 18px;
+    }
+    .window--style1:hover {
+      transform: scale(1.1);
+    }
 
-    .w2 { background: yellow; font-weight: bold; }
-    .w2:hover { background: orange; }
+    .window--style2 {
+      background: yellow;
+      font-weight: bold;
+    }
+    .window--style2:hover {
+      background: orange;
+    }
 
-    .w3 { font-style: italic; color: green; }
-    .w3:hover { transform: rotate(5deg); }
+    .window--style3 {
+      font-style: italic;
+      color: green;
+    }
+    .window--style3:hover {
+      transform: rotate(5deg);
+    }
 
-    .w4 { background: pink; font-family: Courier; }
-    .w4:hover { opacity: 0.6; }
+    .window--style4 {
+      background: pink;
+      font-family: Courier;
+    }
+    .window--style4:hover {
+      opacity: 0.6;
+    }
+
+    /* Блок localStorage */
+    .storage {
+      margin: 20px;
+      padding: 10px;
+    }
+    .storage__input {
+      margin-right: 10px;
+      padding: 5px;
+    }
+    .storage__button {
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+    .storage__output {
+      margin-top: 10px;
+    }
+    .storage__output-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .storage__output-value {
+      padding: 5px;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
 
-<h1>4 секции → карточки → окошки</h1>
+<h1>4 секции → карточки → окошки (БЭМ)</h1>
 
-<!-- LocalStorage -->
-<input id="text" placeholder="Напиши что-то">
-<button onclick="save()">Сохранить</button>
-
-<p>Сохранено:</p>
-<div id="out"></div>
+<!-- Блок localStorage -->
+<div class="storage">
+  <input class="storage__input" id="text" placeholder="Напиши что-то">
+  <button class="storage__button" onclick="save()">Сохранить</button>
+  
+  <div class="storage__output">
+    <div class="storage__output-label">Сохранено:</div>
+    <div class="storage__output-value" id="out"></div>
+  </div>
+</div>
 
 <hr>
 
 <!-- 4 секции -->
-<div class="section"><h2>Секция 1</h2></div>
-<div class="section"><h2>Секция 2</h2></div>
-<div class="section"><h2>Секция 3</h2></div>
-<div class="section"><h2>Секция 4</h2></div>
+<div class="section">
+  <h2 class="section__title">Секция 1</h2>
+</div>
+<div class="section">
+  <h2 class="section__title">Секция 2</h2>
+</div>
+<div class="section">
+  <h2 class="section__title">Секция 3</h2>
+</div>
+<div class="section">
+  <h2 class="section__title">Секция 4</h2>
+</div>
 
 <script>
 /* ---------------- LOCAL STORAGE ---------------- */
@@ -92,10 +159,10 @@ document.querySelectorAll(".section").forEach(section => {
     card.className = "card";
 
     card.innerHTML = `
-      <div class="window w1">Окно 1</div>
-      <div class="window w2">Окно 2</div>
-      <div class="window w3">Окно 3</div>
-      <div class="window w4">Окно 4</div>
+      <div class="window window--style1">Окно 1</div>
+      <div class="window window--style2">Окно 2</div>
+      <div class="window window--style3">Окно 3</div>
+      <div class="window window--style4">Окно 4</div>
     `;
 
     section.appendChild(card);
