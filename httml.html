@@ -1,112 +1,28 @@
-<html>
+<html data-lang="ru">
 <head>
-  <title>Карточки внутри карточек - БЭМ версия</title>
+  <title>Карточки</title>
 
-  <style>
-    /* Блок section */
-    .section {
-      border: 2px solid gray;
-      margin: 20px;
-      padding: 10px;
-      background: #eaeaea;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+  <!-- Дизайн‑система -->
+  <link rel="stylesheet" href="design-system.css">
 
-    /* Элемент заголовка секции */
-    .section__title {
-      width: 100%;
-      margin: 0 0 10px 0;
-    }
+  <!-- Анимации -->
+  <link rel="stylesheet" href="animations.css">
 
-    /* Блок card */
-    .card {
-      border: 2px solid black;
-      padding: 10px;
-      width: 220px;
-      background: #f5f5f5;
-    }
-
-    /* Блок window */
-    .window {
-      border: 1px dashed red;
-      margin: 5px;
-      padding: 5px;
-      transition: 0.3s;
-    }
-
-    /* Модификаторы блока window */
-    .window--style1 {
-      color: blue;
-      font-size: 18px;
-    }
-    .window--style1:hover {
-      transform: scale(1.1);
-    }
-
-    .window--style2 {
-      background: yellow;
-      font-weight: bold;
-    }
-    .window--style2:hover {
-      background: orange;
-    }
-
-    .window--style3 {
-      font-style: italic;
-      color: green;
-    }
-    .window--style3:hover {
-      transform: rotate(5deg);
-    }
-
-    .window--style4 {
-      background: pink;
-      font-family: Courier;
-    }
-    .window--style4:hover {
-      opacity: 0.6;
-    }
-
-    /* Блок localStorage */
-    .storage {
-      margin: 20px;
-      padding: 10px;
-    }
-    .storage__input {
-      margin-right: 10px;
-      padding: 5px;
-    }
-    .storage__button {
-      padding: 5px 15px;
-      cursor: pointer;
-    }
-    .storage__output {
-      margin-top: 10px;
-    }
-    .storage__output-label {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .storage__output-value {
-      padding: 5px;
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-    }
-  </style>
+  <!-- Основные стили -->
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<h1>4 секции → карточки → окошки (БЭМ)</h1>
+<h1 data-i18n="title"></h1>
 
-<!-- Блок localStorage -->
+<!-- Блок LocalStorage -->
 <div class="storage">
-  <input class="storage__input" id="text" placeholder="Напиши что-то">
-  <button class="storage__button" onclick="save()">Сохранить</button>
-  
+  <input class="storage__input" id="text" placeholder="..." data-i18n-placeholder="input_placeholder">
+  <button class="storage__button" onclick="save()" data-i18n="save"></button>
+
   <div class="storage__output">
-    <div class="storage__output-label">Сохранено:</div>
+    <div class="storage__output-label" data-i18n="saved"></div>
     <div class="storage__output-value" id="out"></div>
   </div>
 </div>
@@ -115,28 +31,30 @@
 
 <!-- 4 секции -->
 <div class="section">
-  <h2 class="section__title">Секция 1</h2>
+  <h2 class="section__title" data-i18n="section"></h2>
 </div>
 <div class="section">
-  <h2 class="section__title">Секция 2</h2>
+  <h2 class="section__title" data-i18n="section"></h2>
 </div>
 <div class="section">
-  <h2 class="section__title">Секция 3</h2>
+  <h2 class="section__title" data-i18n="section"></h2>
 </div>
 <div class="section">
-  <h2 class="section__title">Секция 4</h2>
+  <h2 class="section__title" data-i18n="section"></h2>
 </div>
+
+<script src="i18n.js"></script>
 
 <script>
 /* ---------------- LOCAL STORAGE ---------------- */
 function save() {
-  let value = document.getElementById("text").value;
+  const value = document.getElementById("text").value;
   localStorage.setItem("myValue", value);
   show();
 }
 
 function show() {
-  document.getElementById("out").innerText = localStorage.getItem("myValue");
+  document.getElementById("out").innerText = localStorage.getItem("myValue") || "";
 }
 
 show();
@@ -146,12 +64,11 @@ let sections = document.querySelectorAll(".section");
 let arr = Array.from(sections).sort(() => Math.random() - 0.5);
 arr.forEach(sec => document.body.appendChild(sec));
 
-/* ---------------- УДАЛИТЬ ВСЕ КАРТОЧКИ И ДОБАВИТЬ 8 НОВЫХ ---------------- */
+/* ---------------- ДОБАВИТЬ 8 НОВЫХ КАРТОЧЕК ---------------- */
 document.querySelectorAll(".section").forEach(section => {
 
   // Удаляем старые карточки
-  let oldCards = section.querySelectorAll(".card");
-  oldCards.forEach(c => c.remove());
+  section.querySelectorAll(".card").forEach(c => c.remove());
 
   // Добавляем 8 новых карточек
   for (let i = 1; i <= 8; i++) {
@@ -159,10 +76,10 @@ document.querySelectorAll(".section").forEach(section => {
     card.className = "card";
 
     card.innerHTML = `
-      <div class="window window--style1">Окно 1</div>
-      <div class="window window--style2">Окно 2</div>
-      <div class="window window--style3">Окно 3</div>
-      <div class="window window--style4">Окно 4</div>
+      <div class="window window--primary anim-scale" data-i18n="window1"></div>
+      <div class="window window--warning anim-fade" data-i18n="window2"></div>
+      <div class="window window--accent anim-rotate" data-i18n="window3"></div>
+      <div class="window window--mono anim-fade" data-i18n="window4"></div>
     `;
 
     section.appendChild(card);
