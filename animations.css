@@ -1,0 +1,22 @@
+@keyframes scaleUp {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes rotateSoft {
+  from { transform: rotate(0); }
+  to { transform: rotate(5deg); }
+}
+
+.anim-scale:hover {
+  animation: scaleUp var(--anim-normal) forwards;
+}
+
+.anim-rotate:hover {
+  animation: rotateSoft var(--anim-normal) forwards;
+}
+
+.anim-fade:hover {
+  opacity: 0.6;
+  transition: opacity var(--anim-fast);
+}
