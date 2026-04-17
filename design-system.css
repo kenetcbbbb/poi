@@ -1,28 +1,120 @@
+/* WHATRLABEL ДИЗАЙН-СИСТЕМА
+   Формат: { [whatrlabel] [rtl/ltr] [theme = light/dark] } */
+
 :root {
-  --color-bg: #f5f5f5;
-  --color-surface: #ffffff;
-  --color-primary: #dcdcdc;
-  --color-primary: #3b82f6;
-  --color-warning: #facc15;
-  --color-accent: #22c55e;
-  --color-mono: #e879f9;
+    /* WhatrLabel метка */
+    --whatrlabel-version: "1.0";
+    --whatrlabel-direction: "ltr";
+    --whatrlabel-theme: "light";
+    
+    /* ЦВЕТА С ПАЛИТРОЙ 10,50,100...1000 */
+    /* PRIMARY - синий */
+    --primary-10: #e6f0ff;
+    --primary-50: #b9d6ff;
+    --primary-100: #8cbbff;
+    --primary-200: #5fa0ff;
+    --primary-300: #3d8bff;
+    --primary-400: #1a75ff;
+    --primary-500: #0066ff;
+    --primary-600: #005ce6;
+    --primary-700: #004dcc;
+    --primary-800: #003db3;
+    --primary-900: #002e99;
+    --primary-1000: #001f66;
+    
+    /* SECONDARY - фиолетовый */
+    --secondary-10: #f3e8ff;
+    --secondary-50: #e0b3ff;
+    --secondary-100: #cc8cff;
+    --secondary-200: #b966ff;
+    --secondary-300: #a84aff;
+    --secondary-400: #962eff;
+    --secondary-500: #8b1aff;
+    --secondary-600: #7a17e6;
+    --secondary-700: #6613cc;
+    --secondary-800: #520fb3;
+    --secondary-900: #3f0b99;
+    --secondary-1000: #290866;
+    
+    /* ACCENT - зеленый */
+    --accent-10: #e6f9ed;
+    --accent-50: #b3ecc9;
+    --accent-100: #80dfa6;
+    --accent-200: #4dd282;
+    --accent-300: #2ec96b;
+    --accent-400: #0fbf53;
+    --accent-500: #00b341;
+    --accent-600: #009e3a;
+    --accent-700: #008532;
+    --accent-800: #006b29;
+    --accent-900: #00521f;
+    --accent-1000: #003814;
+    
+    /* WARNING - оранжевый */
+    --warning-10: #fff5e6;
+    --warning-50: #ffe0b3;
+    --warning-100: #ffcc80;
+    --warning-200: #ffb84d;
+    --warning-300: #ffa826;
+    --warning-400: #ff9800;
+    --warning-500: #f57c00;
+    --warning-600: #e06a00;
+    --warning-700: #c25700;
+    --warning-800: #a34400;
+    --warning-900: #853100;
+    --warning-1000: #662200;
+    
+    /* ERROR - красный */
+    --error-10: #ffe6e6;
+    --error-50: #ffb3b3;
+    --error-100: #ff8080;
+    --error-200: #ff4d4d;
+    --error-300: #ff2626;
+    --error-400: #ff0000;
+    --error-500: #e60000;
+    --error-600: #cc0000;
+    --error-700: #b30000;
+    --error-800: #990000;
+    --error-900: #800000;
+    --error-1000: #660000;
+    
+    /* Основные цвета */
+    --color-primary: var(--primary-500);
+    --color-secondary: var(--secondary-500);
+    --color-accent: var(--accent-500);
+    --color-warning: var(--warning-500);
+    --color-error: var(--error-500);
+    
+    /* Фон и поверхность */
+    --color-bg: #f5f7fa;
+    --color-surface: #ffffff;
+    --color-border: #e0e0e0;
+    
+    /* Отступы (rem - без пикселей) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem;
+    --space-lg: 1.25rem;
+    --space-xl: 2rem;
+    
+    /* Скругления */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    
+    /* Тени */
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+}
 
-  /* TYPOGRAPHY */
-  --font-main: "Inter", sans-serif;
-  --font-mono: "Courier New", monospace;
+/* Тёмная тема */
+[data-theme="dark"] {
+    --color-bg: #1a1a2e;
+    --color-surface: #16213e;
+    --color-border: #2a3a5a;
+}
 
-  --size-xs: 4px;
-  --size-sm: 8px;
-  --size-md: 12px;
-  --size-lg: 20px;
-  --size-xl: 32px;
-
-  /* RADIUS */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-
-  --anim-fast: 0.2s;
-  --anim-normal: 0.35s;
+/* RTL поддержка */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
 }
