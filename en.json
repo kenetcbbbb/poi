@@ -1,0 +1,11 @@
+const enJson = {
+    "title": "Cards with 4 windows",
+    "save": "💾 Save",
+    "saved": "📦 Saved:",
+    "placeholder": "Enter text...",
+    "section": "Section",
+    "window1": "Window 1 (blue)",
+    "window2": "Window 2 (purple)",
+    "window3": "Window 3 (green)",
+    "window4": "Window 4 (orange)"
+};
