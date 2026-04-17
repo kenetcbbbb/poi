@@ -1,22 +1,41 @@
-@keyframes scaleUp {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+/* Простые анимации для окошек */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@keyframes rotateSoft {
-  from { transform: rotate(0); }
-  to { transform: rotate(5deg); }
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-.anim-scale:hover {
-  animation: scaleUp var(--anim-normal) forwards;
+.anim-fade {
+    animation: fadeIn 0.3s ease-out;
 }
 
-.anim-rotate:hover {
-  animation: rotateSoft var(--anim-normal) forwards;
+.anim-scale {
+    animation: scaleIn 0.3s ease-out;
 }
 
-.anim-fade:hover {
-  opacity: 0.6;
-  transition: opacity var(--anim-fast);
+/* Эффект при наведении на карточку */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
 }
