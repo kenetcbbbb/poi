@@ -1,91 +1,43 @@
-<html data-lang="ru">
+<!DOCTYPE html>
+<html data-lang="ru" dir="ltr">
 <head>
-  <title>Карточки</title>
-
-  <!-- Дизайн‑система -->
-  <link rel="stylesheet" href="design-system.css">
-
-  <!-- Анимации -->
-  <link rel="stylesheet" href="animations.css">
-
-  <!-- Основные стили -->
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточки | WhatrLabel</title>
+    
+    <link rel="stylesheet" href="design-system.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<h1 data-i18n="title"></h1>
+<!-- Кнопки управления -->
+<div class="controls">
+    <button onclick="toggleTheme()">Тема</button>
+    <button onclick="toggleDirection()">RTL/LTR</button>
+    <button onclick="changeLanguage('ru')">Русский</button>
+    <button onclick="changeLanguage('en')">English</button>
+    <button onclick="changeLanguage('de')">Deutsch</button>
+</div>
 
-<!-- Блок LocalStorage -->
+<h1 id="mainTitle"></h1>
+
+<!-- LocalStorage блок -->
 <div class="storage">
-  <input class="storage__input" id="text" placeholder="..." data-i18n-placeholder="input_placeholder">
-  <button class="storage__button" onclick="save()" data-i18n="save"></button>
-
-  <div class="storage__output">
-    <div class="storage__output-label" data-i18n="saved"></div>
-    <div class="storage__output-value" id="out"></div>
-  </div>
+    <input type="text" id="textInput" placeholder="">
+    <button onclick="saveToStorage()" id="saveBtn"></button>
+    <div class="storage-output">
+        <span id="savedLabel"></span>
+        <span id="savedValue"></span>
+    </div>
 </div>
 
 <hr>
 
-<!-- 4 секции -->
-<div class="section">
-  <h2 class="section__title" data-i18n="section"></h2>
-</div>
-<div class="section">
-  <h2 class="section__title" data-i18n="section"></h2>
-</div>
-<div class="section">
-  <h2 class="section__title" data-i18n="section"></h2>
-</div>
-<div class="section">
-  <h2 class="section__title" data-i18n="section"></h2>
-</div>
+<!-- Контейнер для 4 секций -->
+<div id="sectionsContainer"></div>
 
 <script src="i18n.js"></script>
-
-<script>
-/* ---------------- LOCAL STORAGE ---------------- */
-function save() {
-  const value = document.getElementById("text").value;
-  localStorage.setItem("myValue", value);
-  show();
-}
-
-function show() {
-  document.getElementById("out").innerText = localStorage.getItem("myValue") || "";
-}
-
-show();
-
-/* ---------------- ПЕРЕМЕШАТЬ СЕКЦИИ ---------------- */
-let sections = document.querySelectorAll(".section");
-let arr = Array.from(sections).sort(() => Math.random() - 0.5);
-arr.forEach(sec => document.body.appendChild(sec));
-
-/* ---------------- ДОБАВИТЬ 8 НОВЫХ КАРТОЧЕК ---------------- */
-document.querySelectorAll(".section").forEach(section => {
-
-  // Удаляем старые карточки
-  section.querySelectorAll(".card").forEach(c => c.remove());
-
-  // Добавляем 8 новых карточек
-  for (let i = 1; i <= 8; i++) {
-    let card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <div class="window window--primary anim-scale" data-i18n="window1"></div>
-      <div class="window window--warning anim-fade" data-i18n="window2"></div>
-      <div class="window window--accent anim-rotate" data-i18n="window3"></div>
-      <div class="window window--mono anim-fade" data-i18n="window4"></div>
-    `;
-
-    section.appendChild(card);
-  }
-});
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
