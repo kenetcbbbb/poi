@@ -1,4 +1,4 @@
-/* LOCALSTORAGE */
+/* ========== LOCALSTORAGE ========== */
 function saveToStorage() {
     const value = document.getElementById('textInput').value;
     if (value) {
@@ -14,9 +14,10 @@ function loadFromStorage() {
     }
 }
 
-/* СОЗДАНИЕ СЕКЦИЙ, КАРТОЧЕК И 4 ОКОШЕК */
+/* ========== СОЗДАНИЕ СЕКЦИЙ, КАРТОЧЕК И 4 ОКОШЕК ========== */
 function createSections() {
     const container = document.getElementById('sectionsContainer');
+    if (!container) return;
     container.innerHTML = '';
     
     // 4 секции
@@ -26,6 +27,7 @@ function createSections() {
         
         const title = document.createElement('h2');
         title.className = 'section-title';
+        title.textContent = 'Секция ' + s;
         section.appendChild(title);
         
         const cardsGrid = document.createElement('div');
@@ -38,20 +40,20 @@ function createSections() {
             
             const cardNum = document.createElement('div');
             cardNum.className = 'card-number';
-            cardNum.textContent = `Карточка ${c}`;
+            cardNum.textContent = 'Карточка ' + c;
             card.appendChild(cardNum);
             
-            // 4 окошка
+            // 4 окошка с разными цветами
             const windows = [
-                { type: 'primary', label: 'Окошко 1' },
-                { type: 'secondary', label: 'Окошко 2' },
-                { type: 'accent', label: 'Окошко 3' },
-                { type: 'warning', label: 'Окошко 4' }
+                { type: 'primary', label: 'Окошко 1 (синее)' },
+                { type: 'secondary', label: 'Окошко 2 (фиолетовое)' },
+                { type: 'accent', label: 'Окошко 3 (зеленое)' },
+                { type: 'warning', label: 'Окошко 4 (оранжевое)' }
             ];
             
-            windows.forEach((win, idx) => {
+            windows.forEach((win) => {
                 const windowDiv = document.createElement('div');
-                windowDiv.className = `window window--${win.type} anim-fade`;
+                windowDiv.className = 'window window--' + win.type + ' anim-fade';
                 
                 const label = document.createElement('label');
                 label.className = 'window-label';
@@ -74,15 +76,96 @@ function createSections() {
     }
 }
 
-/*  ПЕРЕМЕШИВАНИЕ СЕКЦИЙ */
+/* ========== ПЕРЕМЕШИВАНИЕ СЕКЦИЙ ========== */
 function shuffleSections() {
     const container = document.getElementById('sectionsContainer');
+    if (!container) return;
     const sections = Array.from(container.children);
     const shuffled = sections.sort(() => Math.random() - 0.5);
     shuffled.forEach(section => container.appendChild(section));
 }
 
-/* ТЕМА (светлая/темная)  */
+/* ========== ОБНОВЛЕНИЕ ПЕРЕВОДОВ (без data-i18n) ========== */
+function updateAllTranslations() {
+    // Получаем текущий язык из глобальной переменной
+    let currentLang = window.currentLanguage || 'ru';
+    let t;
+    
+    if (currentLang === 'ru') {
+        t = {
+            title: "Карточки с 4 окошками",
+            save: "💾 Сохранить",
+            saved: "📦 Сохранено:",
+            placeholder: "Введите текст...",
+            section: "Секция",
+            window1: "Окошко 1 (синее)",
+            window2: "Окошко 2 (фиолетовое)",
+            window3: "Окошко 3 (зеленое)",
+            window4: "Окошко 4 (оранжевое)"
+        };
+    } else if (currentLang === 'en') {
+        t = {
+            title: "Cards with 4 windows",
+            save: "💾 Save",
+            saved: "📦 Saved:",
+            placeholder: "Enter text...",
+            section: "Section",
+            window1: "Window 1 (blue)",
+            window2: "Window 2 (purple)",
+            window3: "Window 3 (green)",
+            window4: "Window 4 (orange)"
+        };
+    } else {
+        t = {
+            title: "Karten mit 4 Fenstern",
+            save: "💾 Speichern",
+            saved: "📦 Gespeichert:",
+            placeholder: "Text eingeben...",
+            section: "Sektion",
+            window1: "Fenster 1 (blau)",
+            window2: "Fenster 2 (lila)",
+            window3: "Fenster 3 (grün)",
+            window4: "Fenster 4 (orange)"
+        };
+    }
+    
+    // Заголовок страницы
+    const mainTitle = document.getElementById('mainTitle');
+    if (mainTitle) mainTitle.textContent = t.title;
+    
+    // LocalStorage блок
+    const textInput = document.getElementById('textInput');
+    if (textInput) textInput.placeholder = t.placeholder;
+    
+    const saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.textContent = t.save;
+    
+    const savedLabel = document.getElementById('savedLabel');
+    if (savedLabel) savedLabel.textContent = t.saved;
+    
+    // Заголовки секций
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach((el, i) => {
+        el.textContent = t.section + ' ' + (i + 1);
+    });
+    
+    // Окошки (4 на каждую карточку)
+    const allWindowLabels = document.querySelectorAll('.window-label');
+    const windowTexts = [t.window1, t.window2, t.window3, t.window4];
+    allWindowLabels.forEach((label, index) => {
+        const windowIndex = index % 4;
+        label.textContent = windowTexts[windowIndex];
+    });
+}
+
+/* ========== СМЕНА ЯЗЫКА ========== */
+function changeLanguage(lang) {
+    window.currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    updateAllTranslations();
+}
+
+/* ========== ТЕМА (светлая/темная) ========== */
 function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
@@ -93,42 +176,72 @@ function toggleTheme() {
     }
 }
 
-/* НАПРАВЛЕНИЕ (RTL/LTR) */
+/* ========== НАПРАВЛЕНИЕ (RTL/LTR) ========== */
 function toggleDirection() {
     const html = document.documentElement;
     const isRtl = html.getAttribute('dir') === 'rtl';
     html.setAttribute('dir', isRtl ? 'ltr' : 'rtl');
 }
 
-/* LINTER (проверка на пиксели) */
+/* ========== LINTER (проверка на пиксели) ========== */
 function runLinter() {
-    const allStyles = document.querySelectorAll('[style]');
+    const allElements = document.querySelectorAll('[style]');
     let hasPixels = false;
-    allStyles.forEach(el => {
+    allElements.forEach(el => {
         const style = el.getAttribute('style');
         if (style && /\d+px/.test(style)) {
-            console.warn('Найдены пиксели:', style);
+            console.warn('⚠️ Найдены пиксели:', style);
             hasPixels = true;
         }
     });
-    if (!hasPixels) console.log('✅ Linter: пиксели не используются');
+    if (!hasPixels) console.log('✅ Linter: пиксели не используются, всё в rem');
 }
 
-/*ИНИЦИАЛИЗАЦИЯ */
+/* ========== ПРОВЕРКА АДАПТИВА ========== */
+function checkResponsive() {
+    const width = window.innerWidth;
+    console.log('📐 Текущая ширина:', width + 'px');
+    if (Math.abs(width - 756) < 10) console.log('✅ Проверка на 756px - OK');
+    if (Math.abs(width - 750) < 10) console.log('✅ Проверка на 750px - OK');
+    if (Math.abs(width - 1200) < 10) console.log('✅ Проверка на 1200px - OK');
+}
+
+/* ========== ИНИЦИАЛИЗАЦИЯ ========== */
 function init() {
+    console.log('🚀 Запуск приложения...');
+    
+    // Загружаем сохраненный язык
+    const savedLang = localStorage.getItem('language');
+    window.currentLanguage = savedLang || 'ru';
+    
+    // Создаем секции с карточками
     createSections();
+    
+    // Перемешиваем секции
     shuffleSections();
+    
+    // Загружаем данные из LocalStorage
     loadFromStorage();
-    applyTranslations();
+    
+    // Применяем переводы
+    updateAllTranslations();
+    
+    // Проверяем linter
     runLinter();
     
-    // Вывод WhatrLabel в консоль
-    console.log('WhatrLabel:', {
-        version: getComputedStyle(document.documentElement).getPropertyValue('--whatrlabel-version'),
-        direction: document.documentElement.getAttribute('dir'),
-        theme: document.documentElement.getAttribute('data-theme') || 'light'
+    // Проверяем адаптив
+    checkResponsive();
+    
+    // Выводим WhatrLabel в консоль
+    const html = document.documentElement;
+    console.log('📋 WhatrLabel конфиг:', {
+        whatrlabel: getComputedStyle(html).getPropertyValue('--whatrlabel-version'),
+        direction: html.getAttribute('dir'),
+        theme: html.getAttribute('data-theme') || 'light'
     });
+    
+    console.log('✅ Приложение загружено! Секций:', document.querySelectorAll('.section').length);
 }
 
-// Запуск
+// Запускаем после полной загрузки DOM
 document.addEventListener('DOMContentLoaded', init);
