@@ -1,4 +1,4 @@
-const deJson = {
+{
     "title": "Karten mit 4 Fenstern",
     "save": "💾 Speichern",
     "saved": "📦 Gespeichert:",
@@ -8,4 +8,4 @@ const deJson = {
     "window2": "Fenster 2 (lila)",
     "window3": "Fenster 3 (grün)",
     "window4": "Fenster 4 (orange)"
-};
+}
