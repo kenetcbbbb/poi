@@ -1,171 +1,148 @@
-/* Стили */
-* {
+/* это базовые стили для всей страницы */
+/* задаю фон, шрифт и плавные переходы */
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--color-bg);
-    padding: var(--space-xl);
-    transition: background 0.3s;
+    color: var(--text, var(--color-black));
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Кнопки управления */
-.controls {
-    display: flex;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
-    flex-wrap: wrap;
-}
-
-.controls button {
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    padding: var(--space-sm) var(--space-lg);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-}
-
-.controls button:hover {
-    background: var(--primary-600);
-}
-
-/* Заголовок */
-h1 {
-    color: var(--color-primary);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-}
-
-/* LocalStorage блок */
-.storage {
-    background: var(--color-surface);
+/* это главный контейнер страницы */
+/* ограничиваю ширину и делаю отступы */
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-xl);
-    display: flex;
-    gap: var(--space-md);
-    flex-wrap: wrap;
-    align-items: center;
 }
 
-.storage input {
-    flex: 3;
-    padding: var(--space-sm);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background: var(--color-bg);
+/* это заголовок страницы */
+/* просто крупный текст сверху */
+#mainTitle {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
 }
 
-.storage button {
-    flex: 1;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-}
-
-.storage-output {
+/* это поле ввода */
+/* делаю его широким, с мягкими углами и светлым фоном */
+#textInput {
     width: 100%;
-    margin-top: var(--space-sm);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
-}
-
-hr {
-    margin: var(--space-xl) 0;
-    border-color: var(--color-border);
-}
-
-/* СЕКЦИИ */
-.section {
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
     background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    color: var(--text, var(--color-black));
+    margin-bottom: var(--space-md);
 }
 
-.section h2 {
-    color: var(--color-primary);
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-xs);
-    border-bottom: 2px solid var(--color-primary);
+/* это кнопка сохранить */
+/* делаю её яркой, с белым текстом и pointer */
+#saveBtn {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--color-primary);
+    color: var(--color-white);
+    cursor: var(--cursor-pointer);
+    margin-bottom: var(--space-md);
+    transition: 0.2s;
 }
 
-/* Сетка карточек */
-.cards-grid {
+/* лёгкий эффект при наведении */
+#saveBtn:hover {
+    opacity: 0.9;
+}
+
+/* это блок, где показывается сохранённый текст */
+/* просто небольшой текст под кнопкой */
+#savedValue {
+    margin-top: var(--space-xs);
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* это контейнер, куда js рендерит секции */
+/* делаю сетку с расстоянием между секциями */
+#sectionsContainer {
+    margin-top: var(--space-lg);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     gap: var(--space-lg);
 }
 
-/* Карточка */
-.card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+/* это сама секция */
+/* фон, рамка, скругления */
+.section {
     padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
 }
 
-.card-number {
-    font-weight: bold;
-    margin-bottom: var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
+/* это заголовок секции */
+/* просто текст внутри секции */
+.section-title {
+    margin-bottom: var(--space-md);
+    font-size: 1.3rem;
 }
 
-/* 4 окошка */
+/* это карточка внутри секции */
+/* фон белый, рамка, скругления */
+.card {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    margin-bottom: var(--space-md);
+}
+
+/* это одно окошко внутри карточки */
+/* вертикальная колонка: подпись + input */
 .window {
+    display: flex;
+    flex-direction: column;
     margin-bottom: var(--space-sm);
+}
+
+/* это подпись окошка */
+/* маленький текст над input */
+.window-label {
+    margin-bottom: var(--space-xs);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* это input внутри окошка */
+/* мягкие углы, светлый фон, рамка */
+.window input {
     padding: var(--space-sm);
     border-radius: var(--radius-sm);
-}
-
-.window label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: bold;
-    margin-bottom: 0.25rem;
-}
-
-.window input {
-    width: 100%;
-    padding: 0.375rem;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
     background: var(--color-surface);
+    color: var(--text, var(--color-black));
 }
 
-/* Левосторонняя верстка для input */
-.window input {
-    text-align: left;
+/* это контейнер кнопок управления */
+/* делаю горизонтальный ряд с расстоянием */
+.controls {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
 }
 
-[dir="rtl"] .window input {
-    text-align: right;
+/* это сами кнопки управления */
+/* тема, направление, языки */
+.controls button {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    cursor: var(--cursor-pointer);
+    transition: 0.2s;
 }
 
-/* Цвета окошек */
-.window--primary { background: var(--primary-100); border-left: 0.25rem solid var(--primary-500); }
-.window--secondary { background: var(--secondary-100); border-left: 0.25rem solid var(--secondary-500); }
-.window--accent { background: var(--accent-100); border-left: 0.25rem solid var(--accent-500); }
-.window--warning { background: var(--warning-100); border-left: 0.25rem solid var(--warning-500); }
-
-/*  АДАПТИВ (756px, 750px, 1200px) */
-@media (min-width: 75rem) {  /* 1200px */
-    .cards-grid { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (max-width: 47.25rem) {  /* 756px */
-    body { padding: var(--space-lg); }
-}
-
-@media (max-width: 46.875rem) {  /* 750px */
-    .section { padding: var(--space-md); }
-    .cards-grid { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+/* эффект при наведении */
+.controls button:hover {
+    opacity: 0.9;
 }
