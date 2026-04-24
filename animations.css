@@ -1,9 +1,17 @@
-/* Простые анимации для окошек */
+/* здесь храню все анимации проекта
+   файл нужен, чтобы не смешивать анимации с обычными стилями
+*/
+
+
+/* плавное появление элементов */
+.fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(0.5rem);
+        transform: translateY(0.3rem);
     }
     to {
         opacity: 1;
@@ -11,31 +19,60 @@
     }
 }
 
-@keyframes scaleIn {
+
+/* лёгкое увеличение при наведении */
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+
+/* мягкая тень при наведении */
+.hover-shadow {
+    transition: box-shadow 0.2s ease;
+}
+
+.hover-shadow:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* плавная смена темы */
+html {
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+/* плавная смена цвета карточек */
+.section,
+.card,
+.window input {
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* анимация для перемешивания секций (лёгкое появление) */
+.section {
+    animation: sectionAppear 0.3s ease;
+}
+
+@keyframes sectionAppear {
     from {
-        transform: scale(0.95);
         opacity: 0;
+        transform: scale(0.97);
     }
     to {
-        transform: scale(1);
         opacity: 1;
+        transform: scale(1);
     }
 }
 
-.anim-fade {
-    animation: fadeIn 0.3s ease-out;
-}
 
-.anim-scale {
-    animation: scaleIn 0.3s ease-out;
-}
-
-/* Эффект при наведении на карточку */
-.card {
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
+/* анимация для кнопок (нажатие) */
+button:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
 }
