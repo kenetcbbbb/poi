@@ -1,218 +1,152 @@
-/* этот файл отвечает за:
-   1. сохранение текста в localstorage
-   2. создание секций, карточек и окошек через js
-   3. перемешивание секций
-   4. переключение темы
-   5. переключение направления текста
-   6. проверку linter
-   7. запуск приложения
+/* этот файл отвечает за работу приложения
+   тут загрузка json, рендеринг секций, сохранение текста, тема, направление и линтер
 */
 
 
-// localstorage
+let mockData = null; // сюда сохраню данные из json
 
-// функция сохраняет текст, который пользователь ввёл в input
+
+fetch('./json/mockdata.json') // загружаю файл с данными
+    .then(res => res.json()) // превращаю ответ в объект
+    .then(data => { // получаю данные
+        mockData = data; // сохраняю данные в переменную
+        createSections(mockData); // рендерю секции из json
+        shuffleSections(); // перемешиваю секции
+    })
+    .catch(err => console.log('ошибка загрузки данных:', err)); // если ошибка — пишу в консоль
+
+
+/* сохраняю текст в localstorage */
 function saveToStorage() {
-    // получаю текст из поля ввода
-    const value = document.getElementById('textInput').value;
+    const value = document.getElementById('textInput').value; // беру текст из input
+    if (!value) return; // если пусто — ничего не делаю
 
-    // если поле пустое — просто выхожу
-    if (!value) return;
-
-    // сохраняю текст в localstorage под ключом myValue
-    localStorage.setItem('myValue', value);
-
-    // сразу показываю сохранённый текст на странице
-    document.getElementById('savedValue').textContent = value;
+    localStorage.setItem('myValue', value); // сохраняю текст
+    document.getElementById('savedValue').textContent = value; // показываю сохранённый текст
 }
 
 
-// функция загружает текст при входе на страницу
+/* загружаю текст при входе */
 function loadFromStorage() {
-    // достаю значение по ключу myValue
-    const saved = localStorage.getItem('myValue');
-
-    // если что‑то сохранено — показываю
-    if (saved) {
-        document.getElementById('savedValue').textContent = saved;
+    const saved = localStorage.getItem('myValue'); // беру текст из хранилища
+    if (saved) { // если что‑то есть
+        document.getElementById('savedValue').textContent = saved; // показываю текст
     }
 }
 
 
+/* рендерю секции, карточки и окошки из json */
+function createSections(data) {
+    const container = document.getElementById('sectionsContainer'); // контейнер для секций
+    if (!container) return; // если контейнера нет — выхожу
 
-// создание секций, карточек и окошек
+    container.innerHTML = ''; // очищаю контейнер
 
-// функция создаёт всю структуру: 4 секции, 3 карточки, 8 окошек
-function createSections() {
-    // нахожу контейнер, куда буду добавлять секции
-    const container = document.getElementById('sectionsContainer');
+    data.sections.forEach(section => { // прохожу по секциям
+        const sectionEl = document.createElement('div'); // создаю секцию
+        sectionEl.className = 'section'; // добавляю класс
 
-    // если контейнера нет — выхожу
-    if (!container) return;
+        const title = document.createElement('h2'); // создаю заголовок секции
+        title.className = 'section-title'; // класс заголовка
+        title.textContent = section.title; // текст из json
+        sectionEl.appendChild(title); // добавляю заголовок в секцию
 
-    // очищаю контейнер, чтобы не было дублей
-    container.innerHTML = '';
+        section.cards.forEach(card => { // прохожу по карточкам
+            const cardEl = document.createElement('div'); // создаю карточку
+            cardEl.className = 'card'; // класс карточки
 
-    // создаю 4 секции
-    for (let s = 1; s <= 4; s++) {
+            const cardTitle = document.createElement('h3'); // создаю заголовок карточки
+            cardTitle.textContent = card.title; // текст из json
+            cardEl.appendChild(cardTitle); // добавляю заголовок в карточку
 
-        // создаю div для секции
-        const section = document.createElement('div');
-        section.className = 'section';
+            card.windows.forEach((text, i) => { // прохожу по окнам
+                const windowEl = document.createElement('div'); // создаю окно
+                windowEl.className = 'window'; // класс окна
 
-        // создаю заголовок секции
-        const title = document.createElement('h2');
-        title.className = 'section-title';
-        title.textContent = 'Секция ' + s;
-        section.appendChild(title);
+                const label = document.createElement('label'); // создаю подпись окна
+                label.className = 'window-label'; // класс подписи
+                label.textContent = text; // текст окна из json
+                windowEl.appendChild(label); // добавляю подпись
 
-        // создаю 3 карточки внутри секции
-        for (let c = 1; c <= 3; c++) {
+                const input = document.createElement('input'); // создаю поле ввода
+                input.type = 'text'; // тип input
+                input.dataset.window = i; // сохраняю номер окна
+                windowEl.appendChild(input); // добавляю input
 
-            const card = document.createElement('div');
-            card.className = 'card';
+                cardEl.appendChild(windowEl); // добавляю окно в карточку
+            });
 
-            // создаю 8 окошек внутри карточки
-            for (let w = 1; w <= 8; w++) {
+            sectionEl.appendChild(cardEl); // добавляю карточку в секцию
+        });
 
-                // создаю контейнер окошка
-                const windowDiv = document.createElement('div');
-                windowDiv.className = 'window';
-
-                // создаю подпись окошка
-                const label = document.createElement('label');
-                label.className = 'window-label';
-                label.textContent = 'окно ' + w;
-
-                // создаю поле ввода
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.placeholder = 'введите текст...';
-
-                // собираю окошко
-                windowDiv.appendChild(label);
-                windowDiv.appendChild(input);
-
-                // добавляю окошко в карточку
-                card.appendChild(windowDiv);
-            }
-
-            // добавляю карточку в секцию
-            section.appendChild(card);
-        }
-
-        // добавляю секцию в контейнер
-        container.appendChild(section);
-    }
+        container.appendChild(sectionEl); // добавляю секцию в контейнер
+    });
 }
 
 
-
-// перемешивание секций
-
-// функция меняет порядок секций случайным образом
+/* перемешиваю секции */
 function shuffleSections() {
-    // нахожу контейнер с секциями
-    const container = document.getElementById('sectionsContainer');
-    if (!container) return;
+    const container = document.getElementById('sectionsContainer'); // контейнер секций
+    if (!container) return; // если нет — выхожу
 
-    // превращаю секции в массив
-    const sections = Array.from(container.children);
+    const sections = Array.from(container.children); // превращаю секции в массив
+    const shuffled = sections.sort(() => Math.random() - 0.5); // перемешиваю массив
 
-    // перемешиваю массив случайным образом
-    const shuffled = sections.sort(() => Math.random() - 0.5);
-
-    // вставляю секции в новом порядке
-    shuffled.forEach(section => container.appendChild(section));
+    shuffled.forEach(section => container.appendChild(section)); // вставляю секции в новом порядке
 }
 
 
-
-// переключение темы
-
-// функция меняет тему между светлой и тёмной
+/* переключаю тему */
 function toggleTheme() {
-    const html = document.documentElement;
+    const html = document.documentElement; // беру html
 
-    // если сейчас тёмная — делаю светлую
-    if (html.getAttribute('data-theme') === 'dark') {
-        html.removeAttribute('data-theme');
+    if (html.getAttribute('data-theme') === 'dark') { // если тёмная тема
+        html.removeAttribute('data-theme'); // делаю светлую
     } else {
-        // если светлая — делаю тёмную
-        html.setAttribute('data-theme', 'dark');
+        html.setAttribute('data-theme', 'dark'); // делаю тёмную
     }
 }
 
 
-
-// переключение направления текста
-
-// функция меняет направление текста между ltr и rtl
+/* переключаю направление текста */
 function toggleDirection() {
-    const html = document.documentElement;
+    const html = document.documentElement; // беру html
 
-    // если сейчас rtl — меняю на ltr
-    if (html.getAttribute('dir') === 'rtl') {
-        html.setAttribute('dir', 'ltr');
+    if (html.getAttribute('dir') === 'rtl') { // если справа налево
+        html.setAttribute('dir', 'ltr'); // делаю слева направо
     } else {
-        // если ltr — меняю на rtl
-        html.setAttribute('dir', 'rtl');
+        html.setAttribute('dir', 'rtl'); // делаю справа налево
     }
 }
 
 
-
-// linter
-
-// функция проверяет inline стили на наличие px
+/* проверяю inline стили на px */
 function runLinter() {
-    // нахожу все элементы со style=""
-    const all = document.querySelectorAll('[style]');
-    let hasPixels = false;
+    const all = document.querySelectorAll('[style]'); // ищу элементы со style
+    let hasPixels = false; // флаг наличия px
 
-    // проверяю каждый элемент
-    all.forEach(el => {
-        const style = el.getAttribute('style');
-
-        // если в стиле есть px — предупреждаю
-        if (style && /\d+px/.test(style)) {
-            console.warn('найдены px в стилях:', style);
-            hasPixels = true;
+    all.forEach(el => { // прохожу по элементам
+        const style = el.getAttribute('style'); // беру стиль
+        if (style && /\d+px/.test(style)) { // если есть px
+            console.warn('найдены px в стилях:', style); // предупреждаю
+            hasPixels = true; // ставлю флаг
         }
     });
 
-    // если px нет — пишу что всё ок
-    if (!hasPixels) {
-        console.log('linter: px не используются');
+    if (!hasPixels) { // если px нет
+        console.log('linter: px не используются'); // пишу что всё ок
     }
 }
 
 
-
-// запуск приложения
-
-// функция запускает всё приложение
+/* запускаю приложение */
 async function init() {
-    // загружаю сохранённый язык
-    const savedLang = localStorage.getItem('language');
-    if (savedLang) currentLanguage = savedLang;
+    const savedLang = localStorage.getItem('language'); // беру язык из хранилища
+    if (savedLang) currentLanguage = savedLang; // если есть — ставлю его
 
-    // создаю секции, карточки и окошки
-    createSections();
-
-    // перемешиваю секции
-    shuffleSections();
-
-    // загружаю переводы
-    await loadTranslations(currentLanguage);
-    applyTranslations();
-
-    // загружаю сохранённый текст
-    loadFromStorage();
-
-    // запускаю линтер
-    runLinter();
+    await loadTranslations(currentLanguage); // загружаю переводы
+    loadFromStorage(); // загружаю сохранённый текст
+    runLinter(); // запускаю линтер
 }
 
-// запускаю init после загрузки страницы
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init); // запускаю init после загрузки страницы
