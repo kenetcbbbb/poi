@@ -1,0 +1,41 @@
+/* Простые анимации для окошек */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.anim-fade {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.anim-scale {
+    animation: scaleIn 0.3s ease-out;
+}
+
+/* Эффект при наведении на карточку */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
+}
