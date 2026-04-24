@@ -215,5 +215,4 @@ async function init() {
 }
 
 // запускаю init после загрузки страницы
-document.addEventListener('DOMContentLoaded', init); 0
-label1
+document.addEventListener('DOMContentLoaded', init);
