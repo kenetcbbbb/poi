@@ -1,11 +1,17 @@
 {
-    "title": "Cards with 4 windows",
+    "title": "Cards with 8 windows",
     "save": "💾 Save",
     "saved": "📦 Saved:",
     "placeholder": "Enter text...",
     "section": "Section",
-    "window1": "Window 1 (blue)",
-    "window2": "Window 2 (purple)",
-    "window3": "Window 3 (green)",
-    "window4": "Window 4 (orange)"
+    "windows": [
+        "Window 1 (blue)",
+        "Window 2 (purple)",
+        "Window 3 (green)",
+        "Window 4 (orange)",
+        "Window 5 (red)",
+        "Window 6 (turquoise)",
+        "Window 7 (gray)",
+        "Window 8 (yellow)"
+    ]
 }

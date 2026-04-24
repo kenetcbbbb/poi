@@ -1,11 +1,17 @@
 {
-    "title": "Karten mit 4 Fenstern",
+    "title": "Karten mit 8 Fenstern",
     "save": "💾 Speichern",
     "saved": "📦 Gespeichert:",
     "placeholder": "Text eingeben...",
-    "section": "Sektion",
-    "window1": "Fenster 1 (blau)",
-    "window2": "Fenster 2 (lila)",
-    "window3": "Fenster 3 (grün)",
-    "window4": "Fenster 4 (orange)"
+    "section": "Abschnitt",
+    "windows": [
+        "Fenster 1 (blau)",
+        "Fenster 2 (violett)",
+        "Fenster 3 (grün)",
+        "Fenster 4 (orange)",
+        "Fenster 5 (rot)",
+        "Fenster 6 (türkis)",
+        "Fenster 7 (grau)",
+        "Fenster 8 (gelb)"
+    ]
 }
