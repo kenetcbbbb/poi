@@ -1,180 +1,180 @@
 {
     "sections": [
         {
-            "title": "Секция 1",
+            "title": "section 1",
             "cards": [
                 {
-                    "title": "Карточка 1",
+                    "title": "card 1",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 2",
+                    "title": "card 2",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 3",
+                    "title": "card 3",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 }
             ]
         },
 
         {
-            "title": "Секция 2",
+            "title": "section 2",
             "cards": [
                 {
-                    "title": "Карточка 1",
+                    "title": "card 1",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 2",
+                    "title": "card 2",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 3",
+                    "title": "card 3",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 }
             ]
         },
 
         {
-            "title": "Секция 3",
+            "title": "section 3",
             "cards": [
                 {
-                    "title": "Карточка 1",
+                    "title": "card 1",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 2",
+                    "title": "card 2",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 3",
+                    "title": "card 3",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 }
             ]
         },
 
         {
-            "title": "Секция 4",
+            "title": "section 4",
             "cards": [
                 {
-                    "title": "Карточка 1",
+                    "title": "card 1",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 2",
+                    "title": "card 2",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 },
                 {
-                    "title": "Карточка 3",
+                    "title": "card 3",
                     "windows": [
-                        "Окошко 1",
-                        "Окошко 2",
-                        "Окошко 3",
-                        "Окошко 4",
-                        "Окошко 5",
-                        "Окошко 6",
-                        "Окошко 7",
-                        "Окошко 8"
+                        "window 1",
+                        "window 2",
+                        "window 3",
+                        "window 4",
+                        "window 5",
+                        "window 6",
+                        "window 7",
+                        "window 8"
                     ]
                 }
             ]
