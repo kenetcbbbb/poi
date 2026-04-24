@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    // дизайн‑система
+    <!-- дизайн‑система -->
     <link rel="stylesheet" href="./css/design-system.css">
 
-    // основные стили
+    <!-- основные стили -->
     <link rel="stylesheet" href="./css/styles.css">
 
-    // анимации
+    <!-- анимации -->
     <link rel="stylesheet" href="./css/animations.css">
 
     <title>whatrlabel ui</title>
@@ -19,20 +19,20 @@
 <body>
     <div class="wrapper">
 
-        // заголовок страницы
+        <!-- заголовок страницы -->
         <h1 id="mainTitle">мой проект</h1>
 
-        // поле ввода
+        <!-- поле ввода -->
         <input id="textInput" type="text" placeholder="введите текст...">
 
-        // кнопка сохранить
+        <!-- кнопка сохранить -->
         <button id="saveBtn" onclick="saveToStorage()">сохранить</button>
 
-        // сохранённый текст
+        <!-- сохранённый текст -->
         <div id="savedLabel">сохранено:</div>
         <div id="savedValue"></div>
 
-        // кнопки управления
+        <!-- кнопки управления -->
         <div class="controls">
             <button onclick="toggleTheme()">тема</button>
             <button onclick="toggleDirection()">направление</button>
@@ -40,15 +40,15 @@
             <button onclick="changeLanguage('en')">en</button>
         </div>
 
-        // контейнер для секций (js создаёт всё внутри)
+        <!-- контейнер для секций (js создаёт всё внутри) -->
         <div id="sectionsContainer"></div>
 
     </div>
 
-    // скрипт для языка
+    <!-- скрипт для языка -->
     <script src="./js/languager.js"></script>
 
-    // главный скрипт
+    <!-- главный скрипт -->
     <script src="./js/app.js"></script>
 </body>
 </html>
